@@ -10,12 +10,35 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
+        }
+        #navbar {
+            background-color: #333;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-start;
+        }
+        #navbar button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        #main-content {
+            display: flex;
+            flex: 1;
         }
         #sidebar {
             width: 250px;
             background-color: #f0f0f0;
             padding: 20px;
-            height: 100vh;
+            height: calc(100vh - 60px);
             overflow-y: auto;
         }
         #content {
@@ -47,38 +70,43 @@
     </style>
 </head>
 <body>
-    <div id="sidebar">
-        <h2>카테고리</h2>
-        <div class="category">
-            <span class="category-toggle">▶</span>
-            <a href="#category1">게임 개발</a>
-            <div class="subcategory hidden">
-                <div><a href="#sub1-1">레벨 디자인</a></div>
-                <div><a href="#sub1-2">프로그래밍</a></div>
+    <div id="navbar">
+        <button>버튼 1</button>
+        <button>버튼 2</button>
+        <button>버튼 3</button>
+    </div>
+    <div id="main-content">
+        <div id="sidebar">
+            <h2>카테고리</h2>
+            <div class="category">
+                <span class="category-toggle">▶</span>
+                <a href="#category1">게임 개발</a>
+                <div class="subcategory hidden">
+                    <div><a href="#sub1-1">레벨 디자인</a></div>
+                    <div><a href="#sub1-2">프로그래밍</a></div>
+                </div>
+            </div>
+            <div class="category">
+                <span class="category-toggle">▶</span>
+                <a href="#category2">gray planet</a>
+                <div class="subcategory hidden">
+                    <div><a href="#sub2-1">지역</a></div>
+                    <div><a href="#sub2-2">몬스터들</a></div>
+                    <div><a href="#sub2-3">장비들</a></div>
+                </div>
+            </div>
+            <div class="category">
+                <span class="category-toggle">▶</span>
+                <a href="#category3">기타</a>
+                <div class="subcategory hidden">
+                </div>
             </div>
         </div>
-        <div class="category">
-            <span class="category-toggle">▶</span>
-            <a href="#category2">gray planet</a>
-            <div class="subcategory hidden">
-                <div><a href="#sub2-1">지역</a></div>
-                <div><a href="#sub2-2">몬스터들</a></div>
-                <div><a href="#sub2-3">장비들</a></div>
-            </div>
-        </div>
-        <div class="category">
-            <span class="category-toggle">▶</span>
-            <a href="#category3">기타</a>
-            <div class="subcategory hidden">
-                
-            </div>
+        <div id="content">
+            <h1>내 GitHub Pages 사이트</h1>
+            <p>여기에 메인 콘텐츠를 넣으세요.</p>
         </div>
     </div>
-    <div id="content">
-        <h1>내 GitHub Pages 사이트</h1>
-        <p>여기에 메인 콘텐츠를 넣으세요.</p>
-    </div>
-
     <script>
         document.querySelectorAll('.category-toggle').forEach(toggle => {
             toggle.addEventListener('click', function() {
