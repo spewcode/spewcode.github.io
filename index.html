@@ -12,10 +12,11 @@
             display: flex;
         }
         #sidebar {
-            width: 200px;
+            width: 250px;
             background-color: #f0f0f0;
             padding: 20px;
             height: 100vh;
+            overflow-y: auto;
         }
         #content {
             flex: 1;
@@ -24,23 +25,67 @@
         .category {
             margin-bottom: 10px;
         }
-        .category a {
+        .category > a {
             text-decoration: none;
             color: #333;
+            font-weight: bold;
+        }
+        .subcategory {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+        .subcategory a {
+            text-decoration: none;
+            color: #666;
+        }
+        .category-toggle {
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div id="sidebar">
         <h2>카테고리</h2>
-        <div class="category"><a href="#category1">카테고리 1</a></div>
-        <div class="category"><a href="#category2">카테고리 2</a></div>
-        <div class="category"><a href="#category3">카테고리 3</a></div>
-        <div class="category"><a href="#category4">카테고리 4</a></div>
+        <div class="category">
+            <span class="category-toggle">▶</span>
+            <a href="#category1">카테고리 1</a>
+            <div class="subcategory hidden">
+                <div><a href="#sub1-1">서브카테고리 1-1</a></div>
+                <div><a href="#sub1-2">서브카테고리 1-2</a></div>
+            </div>
+        </div>
+        <div class="category">
+            <span class="category-toggle">▶</span>
+            <a href="#category2">카테고리 2</a>
+            <div class="subcategory hidden">
+                <div><a href="#sub2-1">서브카테고리 2-1</a></div>
+                <div><a href="#sub2-2">서브카테고리 2-2</a></div>
+            </div>
+        </div>
+        <div class="category">
+            <span class="category-toggle">▶</span>
+            <a href="#category3">카테고리 3</a>
+            <div class="subcategory hidden">
+                <div><a href="#sub3-1">서브카테고리 3-1</a></div>
+                <div><a href="#sub3-2">서브카테고리 3-2</a></div>
+            </div>
+        </div>
     </div>
     <div id="content">
         <h1>내 GitHub Pages 사이트</h1>
         <p>여기에 메인 콘텐츠를 넣으세요.</p>
     </div>
+
+    <script>
+        document.querySelectorAll('.category-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                this.textContent = this.textContent === '▶' ? '▼' : '▶';
+                this.nextElementSibling.nextElementSibling.classList.toggle('hidden');
+            });
+        });
+    </script>
 </body>
 </html>
