@@ -1,62 +1,46 @@
-<!-- index.html (홈페이지) -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>홈페이지</title>
+    <title>내 GitHub Pages 사이트</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        #sidebar {
+            width: 200px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            height: 100vh;
+        }
+        #content {
+            flex: 1;
+            padding: 20px;
+        }
+        .category {
+            margin-bottom: 10px;
+        }
+        .category a {
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-    <h1>환영합니다</h1>
-    <nav>
-        <ul>
-            <li><a href="index.html">홈</a></li>
-            <li><a href="about.html">소개</a></li>
-            <li><a href="contact.html">연락처</a></li>
-        </ul>
-    </nav>
-    <p>이곳은 홈페이지입니다.</p>
-</body>
-</html>
-
-<!-- about.html -->
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>소개 페이지</title>
-</head>
-<body>
-    <h1>소개</h1>
-    <nav>
-        <ul>
-            <li><a href="index.html">홈</a></li>
-            <li><a href="about.html">소개</a></li>
-            <li><a href="contact.html">연락처</a></li>
-        </ul>
-    </nav>
-    <p>이곳은 소개 페이지입니다.</p>
-</body>
-</html>
-
-<!-- contact.html -->
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>연락처 페이지</title>
-</head>
-<body>
-    <h1>연락처</h1>
-    <nav>
-        <ul>
-            <li><a href="index.html">홈</a></li>
-            <li><a href="about.html">소개</a></li>
-            <li><a href="contact.html">연락처</a></li>
-        </ul>
-    </nav>
-    <p>이곳은 연락처 페이지입니다.</p>
+    <div id="sidebar">
+        <h2>카테고리</h2>
+        <div class="category"><a href="#category1">카테고리 1</a></div>
+        <div class="category"><a href="#category2">카테고리 2</a></div>
+        <div class="category"><a href="#category3">카테고리 3</a></div>
+        <div class="category"><a href="#category4">카테고리 4</a></div>
+    </div>
+    <div id="content">
+        <h1>내 GitHub Pages 사이트</h1>
+        <p>여기에 메인 콘텐츠를 넣으세요.</p>
+    </div>
 </body>
 </html>
