@@ -1,7 +1,7 @@
 function getSidebarPath() {
     return 'https://spewcode.github.io/sidebar.html';
 }
-
+//로드
 function loadSidebar() {
     console.log('Attempting to load sidebar...');
     fetch(getSidebarPath())
