@@ -1,8 +1,6 @@
-// 사이드바 HTML 파일의 경로를 계산하는 함수
 function getSidebarPath() {
     // 방법 1: 절대 경로 사용 (GitHub Pages 구조에 맞게 조정 필요)
     return 'https://spewcode.github.io/sidebar.html';
-
     // 방법 2: 동적 경로 계산
     //const currentPath = window.location.pathname;
     //const pathParts = currentPath.split('/');
@@ -19,7 +17,12 @@ function loadSidebar() {
             document.querySelectorAll('.category-toggle').forEach(toggle => {
                 toggle.addEventListener('click', function() {
                     this.textContent = this.textContent === '▶' ? '▼' : '▶';
-                    this.nextElementSibling.nextElementSibling.classList.toggle('hidden');
+                    // 현재 토글의 부모 요소(카테고리)를 찾습니다
+                    const category = this.closest('.category');
+                    // 해당 카테고리 내의 모든 하위 카테고리를 토글합니다
+                    category.querySelectorAll('.subcategory').forEach(sub => {
+                        sub.classList.toggle('hidden');
+                    });
                 });
             });
         })
