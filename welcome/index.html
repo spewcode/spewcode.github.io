@@ -5,10 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome - 내 GitHub Pages 사이트</title>
     <style>
-        /* 기존 CSS 코드 유지 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        #navbar {
+            background-color: #f8f8f8;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        #navbar a {
+            background-color: transparent;
+            border: none;
+            color: #333;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        #main-content {
+            display: flex;
+            flex: 1;
+        }
+        #sidebar {
+            width: 250px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+        #content {
+            flex: 1;
+            padding: 20px;
+        }
+        .category {
+            margin-bottom: 10px;
+        }
+        .category > a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .subcategory {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+        .subcategory a {
+            text-decoration: none;
+            color: #666;
+        }
+        .category-toggle {
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
     </style>
-    <!-- sidebar.js 파일을 불러옵니다 -->
-    <script src="https://username.github.io/sidebar.js" defer></script>
+     <script src="../sidebar.js"></script>
 </head>
 <body>
     <div id="navbar">
