@@ -11,7 +11,7 @@
         .hidden {
             display: none;
         }
-        .category-toggle, .subcategory-toggle {
+        .toggle {
             cursor: pointer;
             user-select: none;
         }
@@ -21,11 +21,11 @@
     <div id="sidebar">
         <h2>카테고리</h2>
         <div class="category">
-            <span class="category-toggle">▶</span>
+            <span class="toggle">▶</span>
             <a href="#category1">게임 개발</a>
             <div class="subcategory hidden">
                 <div>
-                    <span class="subcategory-toggle">▶</span>
+                    <span class="toggle">▶</span>
                     <a href="#sub1-1">레벨 디자인</a>
                     <div class="subsubcategory hidden">
                         <div><a href="#subsub1-1-1">맵 레이아웃</a></div>
@@ -34,7 +34,7 @@
                 </div>
                 <div><a href="#sub1-2">프로그래밍</a></div>
                 <div>
-                    <span class="subcategory-toggle">▶</span>
+                    <span class="toggle">▶</span>
                     <a href="#sub1-3">그래픽 디자인</a>
                     <div class="subsubcategory hidden">
                         <div><a href="#subsub1-3-1">캐릭터 디자인</a></div>
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="category">
-            <span class="category-toggle">▶</span>
+            <span class="toggle">▶</span>
             <a href="#category2">Gray Planet</a>
             <div class="subcategory hidden">
                 <div><a href="#sub2-1">지역</a></div>
@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="category">
-            <span class="category-toggle">▶</span>
+            <span class="toggle">▶</span>
             <a href="#category3">기타</a>
             <div class="subcategory hidden">
                 <div><a href="#sub3-1">개발 일지</a></div>
@@ -61,21 +61,19 @@
             </div>
         </div>
     </div>
-
     <script>
         function addToggleListeners() {
-            document.querySelectorAll('.category-toggle, .subcategory-toggle').forEach(toggle => {
+            document.querySelectorAll('.toggle').forEach(toggle => {
                 toggle.addEventListener('click', function(event) {
                     event.stopPropagation();
                     this.textContent = this.textContent === '▶' ? '▼' : '▶';
                     const contentToToggle = this.nextElementSibling.nextElementSibling;
-                    if (contentToToggle && (contentToToggle.classList.contains('subcategory') || contentToToggle.classList.contains('subsubcategory'))) {
+                    if (contentToToggle) {
                         contentToToggle.classList.toggle('hidden');
                     }
                 });
             });
         }
-
         document.addEventListener('DOMContentLoaded', addToggleListeners);
     </script>
 </body>
