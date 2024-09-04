@@ -1,31 +1,28 @@
-<h2>카테고리</h2>
-<div class="category">
-    <span class="category-toggle">▶</span>
-    <a href="#category1">게임 개발</a>
-    <div class="subcategory hidden">
-        <div>
-            <span class="subcategory-toggle">▶</span>
-            <a href="#sub1-1">레벨 디자인</a>
-            <div class="subsubcategory hidden">
-                <div><a href="#subsub1-1-1">맵 레이아웃</a></div>
-                <div><a href="#subsub1-1-2">난이도 조절</a></div>
-            </div>
-        </div>
-        <div><a href="#sub1-2">프로그래밍</a></div>
-    </div>
-</div>
-<div class="category">
-    <span class="category-toggle">▶</span>
-    <a href="#category2">gray planet</a>
-    <div class="subcategory hidden">
-        <div><a href="#sub2-1">지역</a></div>
-        <div><a href="#sub2-2">몬스터들</a></div>
-        <div><a href="#sub2-3">장비들</a></div>
-    </div>
-</div>
-<div class="category">
-    <span class="category-toggle">▶</span>
-    <a href="#category3">기타</a>
-    <div class="subcategory hidden">
-    </div>
-</div>
+function loadSidebar() {
+    fetch(getSidebarPath())
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('sidebar').innerHTML = data;
+            // 모든 토글 요소에 이벤트 리스너 추가
+            addToggleListeners();
+        })
+        .catch(error => console.error('Error loading sidebar:', error));
+}
+
+function addToggleListeners() {
+    // 카테고리와 서브카테고리 토글에 이벤트 리스너 추가
+    document.querySelectorAll('.category-toggle, .subcategory-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function(event) {
+            event.stopPropagation(); // 이벤트 버블링 방지
+            this.textContent = this.textContent === '▶' ? '▼' : '▶';
+            // 다음 형제 요소 중 .subcategory 또는 .subsubcategory 클래스를 가진 요소 토글
+            const contentToToggle = this.nextElementSibling.nextElementSibling;
+            if (contentToToggle && (contentToToggle.classList.contains('subcategory') || contentToToggle.classList.contains('subsubcategory'))) {
+                contentToToggle.classList.toggle('hidden');
+            }
+        });
+    });
+}
+
+// 페이지 로드 시 사이드바 로드
+document.addEventListener('DOMContentLoaded', loadSidebar);
