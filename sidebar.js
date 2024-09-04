@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    fetch('https://username.github.io/sidebar.html')
+    fetch('https://spewcode.github.io/sidebar.html')
         .then(response => response.text())
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
