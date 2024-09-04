@@ -1,6 +1,17 @@
-//
+// 사이드바 HTML 파일의 경로를 계산하는 함수
+function getSidebarPath() {
+    // 방법 1: 절대 경로 사용 (GitHub Pages 구조에 맞게 조정 필요)
+    // return '/path/to/sidebar.html';
+
+    // 방법 2: 동적 경로 계산
+    const currentPath = window.location.pathname;
+    const pathParts = currentPath.split('/');
+    pathParts.pop(); // 현재 HTML 파일명 제거
+    return pathParts.join('/') + '/sidebar.html';
+}
+
 function loadSidebar() {
-    fetch('sidebar.html')
+    fetch(getSidebarPath())
         .then(response => response.text())
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
@@ -11,7 +22,8 @@ function loadSidebar() {
                     this.nextElementSibling.nextElementSibling.classList.toggle('hidden');
                 });
             });
-        });
+        })
+        .catch(error => console.error('Error loading sidebar:', error));
 }
 
 // 페이지 로드 시 사이드바 로드
