@@ -33,23 +33,17 @@ function setupSidebarInteractions() {
     
     toggles.forEach((toggle, index) => {
         console.log(`토글 ${index + 1}에 이벤트 리스너 추가`);
-        toggle.addEventListener('click', function(event) {
-            event.preventDefault();
+        toggle.addEventListener('click', function() {
             console.log(`토글 ${index + 1} 클릭됨`);
             this.textContent = this.textContent === '▶' ? '▼' : '▶';
-            
             const category = this.closest('.category, .subcategory, .subsubcategory');
             console.log(`카테고리 찾음: ${category ? 'Yes' : 'No'}`);
-            
-            if (category) {
-                const subcategory = category.querySelector(':scope > .subcategory, :scope > .subsubcategory');
-                if (subcategory) {
-                    subcategory.classList.toggle('hidden');
-                    console.log('(서브)카테고리 가시성 토글됨');
-                } else {
-                    console.log('토글할 (서브)카테고리를 찾을 수 없음');
-                }
-            }
+            const subcategories = category.querySelectorAll('.subcategory, .subsubcategory');
+            console.log(`${subcategories.length}개의 서브카테고리 발견`);
+            subcategories.forEach(sub => {
+                sub.classList.toggle('hidden');
+                console.log('서브카테고리 가시성 토글됨');
+            });
         });
     });
 }
