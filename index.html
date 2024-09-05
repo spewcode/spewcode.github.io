@@ -1,64 +1,85 @@
-<!DOCTYPE html>
-<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사이드바</title>
+    <title>내 GitHub Pages 사일트1</title>
     <style>
-        .category, .subcategory {
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        #navbar {
+            background-color: #f8f8f8;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        #navbar a {
+            background-color: transparent;
+            border: none;
+            color: #333;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        #main-content {
+            display: flex;
+            flex: 1;
+        }
+        #sidebar {
+            width: 250px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+        #content {
+            flex: 1;
+            padding: 20px;
+        }
+        .category {
+            margin-bottom: 10px;
+        }
+        .category > a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .subcategory {
             margin-left: 20px;
+            margin-top: 5px;
+        }
+        .subcategory a {
+            text-decoration: none;
+            color: #666;
+        }
+        .category-toggle {
+            cursor: pointer;
         }
         .hidden {
             display: none;
         }
-        .category-toggle {
-            cursor: pointer;
-            user-select: none;
-        }
     </style>
+    <script src="sidebar.js"></script>
 </head>
 <body>
-    <div id="sidebar">
-        <h2>카테고리가</h2>
-        <div class="category">
-            <span class="category-toggle">▶</span>
-            <a href="#category1">게임 개발</a>
-            <div class="subcategory hidden">
-                <div><a href="#sub1-1">프로그래밍</a></div>
-                <div><a href="#sub1-2">레벨디자인</a></div>
-            </div>
+    <div id="navbar">
+        <a href="https://spewcode.github.io">Home</a>
+        <a href="welcome/">Welcome</a>
+        <a href="category.html">Category</a>
+    </div>
+    <div id="main-content">
+        <div id="sidebar">
+            <!-- 사이드바 내용은 JavaScript로 로드됩니다 -->
         </div>
-        <div class="category">
-            <span class="category-toggle">▶</span>
-            <a href="#category2">Gray Planet</a>
-            <div class="subcategory hidden">
-                <div><a href="#sub2-1">지역</a></div>
-                <div><a href="#sub2-2">몬스터들</a></div>
-                <div><a href="#sub2-3">장비들</a></div>
-            </div>
-        </div>
-        <div class="category">
-            <span class="category-toggle">▶</span>
-            <a href="#category3">기타</a>
-            <div class="subcategory hidden">
-                <div><a href="#sub3-1">기타_1</a></div>
-                <div><a href="#sub3-2">기타_2</a></div>
-            </div>
+        <div id="content">
+            <h1>내 GitHub Pages 사이트</h1>
+            <p>여기에 메인 콘텐츠를 넣으세요.</p>
         </div>
     </div>
-    <script>
-        function addToggleListeners() {
-            document.querySelectorAll('.category-toggle').forEach(toggle => {
-                toggle.addEventListener('click', function() {
-                    this.textContent = this.textContent === '▶' ? '▼' : '▶';
-                    const subcategory = this.nextElementSibling.nextElementSibling;
-                    if (subcategory && subcategory.classList.contains('subcategory')) {
-                        subcategory.classList.toggle('hidden');
-                    }
-                });
-            });
-        }
-        document.addEventListener('DOMContentLoaded', addToggleListeners);
-    </script>
-</body>
-</html>
