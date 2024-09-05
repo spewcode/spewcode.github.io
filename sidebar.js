@@ -7,21 +7,22 @@ function setupSidebarInteractions() {
     
     toggles.forEach((toggle, index) => {
         console.log(`토글 ${index + 1}에 이벤트 리스너 추가`);
-        toggle.addEventListener('click', function() {
+        toggle.addEventListener('click', function(event) {
+            event.stopPropagation(); // 이벤트 버블링 방지
             console.log(`토글 ${index + 1} 클릭됨`);
             this.textContent = this.textContent === '▶' ? '▼' : '▶';
-            const category = this.closest('.category, .subcategory, .subsubcategory');
-            console.log(`카테고리 찾음: ${category ? 'Yes' : 'No'}`);
-            const subcategories = category.querySelectorAll(':scope > .subcategory, :scope > .subsubcategory');
-            console.log(`${subcategories.length}개의 (서브)카테고리 발견`);
             
-            const subsubcategoriesInThis = category.querySelectorAll('.subsubcategory');
-            console.log(`이 카테고리 내 ${subsubcategoriesInThis.length}개의 서브서브 카테고리 발견`);
+            let nextElement = this.nextElementSibling;
+            while (nextElement && !nextElement.classList.contains('subcategory') && !nextElement.classList.contains('subsubcategory')) {
+                nextElement = nextElement.nextElementSibling;
+            }
             
-            subcategories.forEach(sub => {
-                sub.classList.toggle('hidden');
-                console.log('(서브)카테고리 가시성 토글됨');
-            });
+            if (nextElement && (nextElement.classList.contains('subcategory') || nextElement.classList.contains('subsubcategory'))) {
+                nextElement.classList.toggle('hidden');
+                console.log(`${nextElement.classList.contains('subcategory') ? '서브' : '서브서브'}카테고리 토글됨`);
+            }
         });
     });
 }
+
+document.addEventListener('DOMContentLoaded', setupSidebarInteractions);
