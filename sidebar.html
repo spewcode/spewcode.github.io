@@ -28,11 +28,11 @@
                     <span class="subcategory-toggle">▶</span>
                     <a href="#sub1-1">프로그래밍</a>
                     <div class="subsubcategory hidden">
-                        <div><a href="#subsub1-1-1">언어</a></div>
-                        <div><a href="#subsub1-1-2">알고리즘</a></div>
+                        <div><span class="subsubcategory-toggle">▶</span><a href="#subsub1-1-1">언어</a></div>
+                        <div><span class="subsubcategory-toggle">▶</span><a href="#subsub1-1-2">알고리즘</a></div>
                     </div>
                 </div>
-                <div><a href="#sub1-2">레벨디자인</a></div>
+                <div><span class="subcategory-toggle">▶</span><a href="#sub1-2">레벨디자인</a></div>
             </div>
         </div>
         <div class="category">
@@ -43,36 +43,22 @@
                     <span class="subcategory-toggle">▶</span>
                     <a href="#sub2-1">지역</a>
                     <div class="subsubcategory hidden">
-                        <div><a href="#subsub2-1-1">대륙</a></div>
-                        <div><a href="#subsub2-1-2">도시</a></div>
+                        <div><span class="subsubcategory-toggle">▶</span><a href="#subsub2-1-1">대륙</a></div>
+                        <div><span class="subsubcategory-toggle">▶</span><a href="#subsub2-1-2">도시</a></div>
                     </div>
                 </div>
-                <div><a href="#sub2-2">몬스터들</a></div>
-                <div><a href="#sub2-3">장비들</a></div>
+                <div><span class="subcategory-toggle">▶</span><a href="#sub2-2">몬스터들</a></div>
+                <div><span class="subcategory-toggle">▶</span><a href="#sub2-3">장비들</a></div>
             </div>
         </div>
         <div class="category">
             <span class="category-toggle">▶</span>
             <a href="#category3">기타</a>
             <div class="subcategory hidden">
-                <div><a href="#sub3-1">기타_1</a></div>
-                <div><a href="#sub3-2">기타_2</a></div>
+                <div><span class="subcategory-toggle">▶</span><a href="#sub3-1">기타_1</a></div>
+                <div><span class="subcategory-toggle">▶</span><a href="#sub3-2">기타_2</a></div>
             </div>
         </div>
     </div>
-    <script>
-        function addToggleListeners() {
-            document.querySelectorAll('.category-toggle, .subcategory-toggle, .subsubcategory-toggle').forEach(toggle => {
-                toggle.addEventListener('click', function() {
-                    this.textContent = this.textContent === '▶' ? '▼' : '▶';
-                    const nextElement = this.nextElementSibling.nextElementSibling;
-                    if (nextElement && (nextElement.classList.contains('subcategory') || nextElement.classList.contains('subsubcategory'))) {
-                        nextElement.classList.toggle('hidden');
-                    }
-                });
-            });
-        }
-        document.addEventListener('DOMContentLoaded', addToggleListeners);
-    </script>
 </body>
 </html>
