@@ -36,14 +36,23 @@ function setupSidebarInteractions() {
         toggle.addEventListener('click', function() {
             console.log(`토글 ${index + 1} 클릭됨`);
             this.textContent = this.textContent === '▶' ? '▼' : '▶';
-            const category = this.closest('.category, .subcategory, .subsubcategory');
-            console.log(`카테고리 찾음: ${category ? 'Yes' : 'No'}`);
-            const subcategories = category.querySelectorAll(':scope > .subcategory, :scope > .subsubcategory');
-            console.log(`${subcategories.length}개의 (서브)카테고리 발견`);
-            subcategories.forEach(sub => {
-                sub.classList.toggle('hidden');
-                console.log('(서브)카테고리 가시성 토글됨');
-            });
+            
+            const nextSibling = this.nextElementSibling;
+            const parentElement = this.parentElement;
+            let subcategory;
+            
+            if (nextSibling && (nextSibling.classList.contains('subcategory') || nextSibling.classList.contains('subsubcategory'))) {
+                subcategory = nextSibling;
+            } else if (parentElement.nextElementSibling && (parentElement.nextElementSibling.classList.contains('subcategory') || parentElement.nextElementSibling.classList.contains('subsubcategory'))) {
+                subcategory = parentElement.nextElementSibling;
+            }
+            
+            if (subcategory) {
+                subcategory.classList.toggle('hidden');
+                console.log(`${subcategory.classList.contains('subcategory') ? '서브' : '서브서브'}카테고리 가시성 토글됨`);
+            } else {
+                console.log('토글할 (서브)카테고리를 찾을 수 없음');
+            }
         });
     });
 }
