@@ -3,7 +3,7 @@ function getSidebarPath() {
 }
 
 function loadSidebar() {
-    console.log('사이드바 로드 시도 중...');
+    console.log('사이드바 로드 시도 중임.');
     fetch(getSidebarPath())
         .then(response => {
             if (!response.ok) {
