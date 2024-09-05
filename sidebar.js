@@ -1,48 +1,51 @@
-function setupSidebarInteractions() {
-    console.log('setupSidebarInteractions 함수 시작');
-    try {
-        const sidebar = document.getElementById('sidebar');
-        if (!sidebar) {
-            throw new Error('사이드바 요소를 찾을 수 없습니다.');
-        }
-        
-        const toggles = sidebar.querySelectorAll('.category-toggle, .subcategory-toggle, .subsubcategory-toggle');
-        console.log(`${toggles.length}개의 카테고리 토글 발견`);
-        
-        const subsubcategories = sidebar.querySelectorAll('.subsubcategory');
-        console.log(`총 ${subsubcategories.length}개의 서브서브 카테고리 발견`);
-        
-        toggles.forEach((toggle, index) => {
-            console.log(`토글 ${index + 1}에 이벤트 리스너 추가`);
-            toggle.addEventListener('click', function(event) {
-                event.stopPropagation();
-                console.log(`토글 ${index + 1} 클릭됨`);
-                this.textContent = this.textContent === '▶' ? '▼' : '▶';
-                
-                let nextElement = this.nextElementSibling;
-                while (nextElement && !nextElement.classList.contains('subcategory') && !nextElement.classList.contains('subsubcategory')) {
-                    nextElement = nextElement.nextElementSibling;
-                }
-                
-                if (nextElement && (nextElement.classList.contains('subcategory') || nextElement.classList.contains('subsubcategory'))) {
-                    nextElement.classList.toggle('hidden');
-                    console.log(`${nextElement.classList.contains('subcategory') ? '서브' : '서브서브'}카테고리 토글됨`);
-                }
-            });
-        });
-    } catch (error) {
-        console.error('사이드바 설정 중 오류 발생:', error);
-    }
+function getSidebarPath() {
+    return 'https://spewcode.github.io/sidebar.html';
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOMContentLoaded 이벤트 발생');
-    setupSidebarInteractions();
-});
+function loadSidebar() {
+    console.log('사이드바 로드 시도 중...');
+    fetch(getSidebarPath())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            console.log('사이드바 HTML 요청 성공');
+            return response.text();
+        })
+        .then(data => {
+            console.log('사이드바 HTML 로드 성공');
+            if (data.trim().length === 0) {
+                throw new Error('로드된 HTML이 비어 있습니다.');
+            }
+            document.getElementById('sidebar').innerHTML = data;
+            console.log('사이드바 HTML DOM에 삽입됨');
+            setupSidebarInteractions();
+        })
+        .catch(error => {
+            console.error('사이드바 로드 오류:', error);
+            document.getElementById('sidebar').innerHTML = `<p class="error-message">사이드바를 로드할 수 없습니다: ${error.message}</p>`;
+        });
+}
 
-window.addEventListener('load', function() {
-    console.log('window load 이벤트 발생');
-    if (!document.querySelector('.category-toggle')) {
-        console.error('카테고리 토글 요소를 찾을 수 없습니다. HTML이 제대로 로드되었는지 확인하세요.');
-    }
-});
+function setupSidebarInteractions() {
+    const toggles = document.querySelectorAll('.category-toggle, .subcategory-toggle, .subsubcategory-toggle');
+    console.log(`${toggles.length}개의 카테고리 토글 발견`);
+    
+    toggles.forEach((toggle, index) => {
+        console.log(`토글 ${index + 1}에 이벤트 리스너 추가`);
+        toggle.addEventListener('click', function() {
+            console.log(`토글 ${index + 1} 클릭됨`);
+            this.textContent = this.textContent === '▶' ? '▼' : '▶';
+            const category = this.closest('.category, .subcategory, .subsubcategory');
+            console.log(`카테고리 찾음: ${category ? 'Yes' : 'No'}`);
+            const subcategories = category.querySelectorAll('.subcategory, .subsubcategory');
+            console.log(`${subcategories.length}개의 서브카테고리 발견`);
+            subcategories.forEach(sub => {
+                sub.classList.toggle('hidden');
+                console.log('서브카테고리 가시성 토글됨');
+            });
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', loadSidebar);
