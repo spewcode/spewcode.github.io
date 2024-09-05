@@ -2,7 +2,7 @@ function getSidebarPath() {
     return 'https://spewcode.github.io/sidebar.html';
 }
 function loadSidebar() {
-    console.log('사이드바 로드 시도 중...');
+    console.log('사이드바 로드 시도 중.');
     fetch(getSidebarPath())
         .then(response => {
             if (!response.ok) {
